@@ -1,0 +1,699 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FinanceMonitorModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="FinanceMonitorModelStoreContainer">
+          <EntitySet Name="Accounts" EntityType="FinanceMonitorModel.Store.Accounts" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AccountTypes" EntityType="FinanceMonitorModel.Store.AccountTypes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ConnectionCredentials" EntityType="FinanceMonitorModel.Store.ConnectionCredentials" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ConnectionNames" EntityType="FinanceMonitorModel.Store.ConnectionNames" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="refConnName_AccountType" EntityType="FinanceMonitorModel.Store.refConnName_AccountType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TotalAmountByAccount" EntityType="FinanceMonitorModel.Store.TotalAmountByAccount" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="FinanceMonitorModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Accounts_ConnectionCredentials" Association="FinanceMonitorModel.Store.FK_Accounts_ConnectionCredentials">
+            <End Role="ConnectionCredentials" EntitySet="ConnectionCredentials" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Accounts_refConnName_AccountType" Association="FinanceMonitorModel.Store.FK_Accounts_refConnName_AccountType">
+            <End Role="refConnName_AccountType" EntitySet="refConnName_AccountType" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Accounts_Users" Association="FinanceMonitorModel.Store.FK_Accounts_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConnectionCredentials_ConnectionNames" Association="FinanceMonitorModel.Store.FK_ConnectionCredentials_ConnectionNames">
+            <End Role="ConnectionNames" EntitySet="ConnectionNames" />
+            <End Role="ConnectionCredentials" EntitySet="ConnectionCredentials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_refConnName_AccountType_AccountTypes" Association="FinanceMonitorModel.Store.FK_refConnName_AccountType_AccountTypes">
+            <End Role="AccountTypes" EntitySet="AccountTypes" />
+            <End Role="refConnName_AccountType" EntitySet="refConnName_AccountType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_refConnName_AccountType_ConnectionNames" Association="FinanceMonitorModel.Store.FK_refConnName_AccountType_ConnectionNames">
+            <End Role="ConnectionNames" EntitySet="ConnectionNames" />
+            <End Role="refConnName_AccountType" EntitySet="refConnName_AccountType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TotalAmountByAccount_Accounts" Association="FinanceMonitorModel.Store.FK_TotalAmountByAccount_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="TotalAmountByAccount" EntitySet="TotalAmountByAccount" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ConnName_AccountTypeID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="ConnCredentialsID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AccountTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AccountType" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ConnectionCredentials">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ConnectionID" Type="int" Nullable="false" />
+          <Property Name="LoginUsername" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="LoginPassword" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="key" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ConnectionNames">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ConnectionName" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="refConnName_AccountType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ConnectionNameID" Type="int" Nullable="false" />
+          <Property Name="AccountTypeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TotalAmountByAccount">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AccountID" Type="int" Nullable="false" />
+          <Property Name="RequestDate" Type="datetime2" Nullable="false" />
+          <Property Name="Amount" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="key" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Accounts_ConnectionCredentials">
+          <End Role="ConnectionCredentials" Type="FinanceMonitorModel.Store.ConnectionCredentials" Multiplicity="1" />
+          <End Role="Accounts" Type="FinanceMonitorModel.Store.Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConnectionCredentials">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="ConnCredentialsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Accounts_refConnName_AccountType">
+          <End Role="refConnName_AccountType" Type="FinanceMonitorModel.Store.refConnName_AccountType" Multiplicity="1" />
+          <End Role="Accounts" Type="FinanceMonitorModel.Store.Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="refConnName_AccountType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="ConnName_AccountTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Accounts_Users">
+          <End Role="Users" Type="FinanceMonitorModel.Store.Users" Multiplicity="1" />
+          <End Role="Accounts" Type="FinanceMonitorModel.Store.Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConnectionCredentials_ConnectionNames">
+          <End Role="ConnectionNames" Type="FinanceMonitorModel.Store.ConnectionNames" Multiplicity="1" />
+          <End Role="ConnectionCredentials" Type="FinanceMonitorModel.Store.ConnectionCredentials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConnectionNames">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ConnectionCredentials">
+              <PropertyRef Name="ConnectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_refConnName_AccountType_AccountTypes">
+          <End Role="AccountTypes" Type="FinanceMonitorModel.Store.AccountTypes" Multiplicity="1" />
+          <End Role="refConnName_AccountType" Type="FinanceMonitorModel.Store.refConnName_AccountType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="refConnName_AccountType">
+              <PropertyRef Name="AccountTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_refConnName_AccountType_ConnectionNames">
+          <End Role="ConnectionNames" Type="FinanceMonitorModel.Store.ConnectionNames" Multiplicity="1" />
+          <End Role="refConnName_AccountType" Type="FinanceMonitorModel.Store.refConnName_AccountType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConnectionNames">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="refConnName_AccountType">
+              <PropertyRef Name="ConnectionNameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TotalAmountByAccount_Accounts">
+          <End Role="Accounts" Type="FinanceMonitorModel.Store.Accounts" Multiplicity="1" />
+          <End Role="TotalAmountByAccount" Type="FinanceMonitorModel.Store.TotalAmountByAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TotalAmountByAccount">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="CheckIfUserExistsByUsername" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="CreateAccount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="ConnNameID" Type="int" Mode="In" />
+          <Parameter Name="AccountTypeiD" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CreateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="key" Type="varchar" Mode="In" />
+          <Parameter Name="FirstName" Type="varchar" Mode="In" />
+          <Parameter Name="LastName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="DeleteAccount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetAccountValuesByUserAndTimeframe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="TimeFrame" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetAllAccountsByUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetAllPossibleAccounts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetConnectionCredentials" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccountID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetConnNameAccTypeByAccID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccountID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetDateEST" ReturnType="datetime2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="InsertAmountForAccount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccountID" Type="int" Mode="In" />
+          <Parameter Name="Amount" Type="money" Mode="In" />
+        </Function>
+        <Function Name="UpdateAccountConnectionCredentials" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccountID" Type="int" Mode="In" />
+          <Parameter Name="LoginUsername" Type="varchar" Mode="In" />
+          <Parameter Name="LoginPassword" Type="varchar" Mode="In" />
+          <Parameter Name="key" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateUserPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="key" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ValidateUserCredentials" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FinanceMonitorModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FinanceMonitorEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="FinanceMonitorModel.Account" />
+          <EntitySet Name="AccountTypes" EntityType="FinanceMonitorModel.AccountType" />
+          <EntitySet Name="ConnectionCredentials" EntityType="FinanceMonitorModel.ConnectionCredential" />
+          <EntitySet Name="ConnectionNames" EntityType="FinanceMonitorModel.ConnectionName" />
+          <EntitySet Name="refConnName_AccountType" EntityType="FinanceMonitorModel.refConnName_AccountType" />
+          <EntitySet Name="TotalAmountByAccounts" EntityType="FinanceMonitorModel.TotalAmountByAccount" />
+          <EntitySet Name="Users" EntityType="FinanceMonitorModel.User" />
+          <AssociationSet Name="FK_Accounts_ConnectionCredentials" Association="FinanceMonitorModel.FK_Accounts_ConnectionCredentials">
+            <End Role="ConnectionCredentials" EntitySet="ConnectionCredentials" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Accounts_refConnName_AccountType" Association="FinanceMonitorModel.FK_Accounts_refConnName_AccountType">
+            <End Role="refConnName_AccountType" EntitySet="refConnName_AccountType" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Accounts_Users" Association="FinanceMonitorModel.FK_Accounts_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TotalAmountByAccount_Accounts" Association="FinanceMonitorModel.FK_TotalAmountByAccount_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="TotalAmountByAccount" EntitySet="TotalAmountByAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_refConnName_AccountType_AccountTypes" Association="FinanceMonitorModel.FK_refConnName_AccountType_AccountTypes">
+            <End Role="AccountTypes" EntitySet="AccountTypes" />
+            <End Role="refConnName_AccountType" EntitySet="refConnName_AccountType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConnectionCredentials_ConnectionNames" Association="FinanceMonitorModel.FK_ConnectionCredentials_ConnectionNames">
+            <End Role="ConnectionNames" EntitySet="ConnectionNames" />
+            <End Role="ConnectionCredentials" EntitySet="ConnectionCredentials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_refConnName_AccountType_ConnectionNames" Association="FinanceMonitorModel.FK_refConnName_AccountType_ConnectionNames">
+            <End Role="ConnectionNames" EntitySet="ConnectionNames" />
+            <End Role="refConnName_AccountType" EntitySet="refConnName_AccountType" />
+          </AssociationSet>
+          <FunctionImport Name="GetAllAccountsByUser" ReturnType="Collection(FinanceMonitorModel.GetAllAccountsByUser_Result)">
+          <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetConnectionCredentials" ReturnType="Collection(FinanceMonitorModel.GetConnectionCredentials_Result)">
+          <Parameter Name="AccountID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertAmountForAccount">
+            <Parameter Name="AccountID" Mode="In" Type="Int32" />
+            <Parameter Name="Amount" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="ValidateUserCredentials" ReturnType="Collection(Int32)">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetConnNameAccTypeByAccID" ReturnType="Collection(FinanceMonitorModel.GetConnNameAccTypeByAccID_Result)">
+          <Parameter Name="AccountID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateUserPassword">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="key" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CheckIfUserExistsByUsername" ReturnType="Collection(FinanceMonitorModel.CheckIfUserExistsByUsername_Result)">
+          <Parameter Name="Username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteUser">
+          <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteAccount">
+          <Parameter Name="AccID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateAccountConnectionCredentials">
+            <Parameter Name="AccountID" Mode="In" Type="Int32" />
+            <Parameter Name="LoginUsername" Mode="In" Type="String" />
+            <Parameter Name="LoginPassword" Mode="In" Type="String" />
+            <Parameter Name="key" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CreateAccount">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="ConnNameID" Mode="In" Type="Int32" />
+            <Parameter Name="AccountTypeiD" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CreateAccount_ConnCredentials_Return" ReturnType="Collection(Int32)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="ConnNameID" Mode="In" Type="Int32" />
+            <Parameter Name="AccountTypeiD" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllPossibleAccounts" ReturnType="Collection(FinanceMonitorModel.GetAllPossibleAccounts_Result)" />
+          <FunctionImport Name="CreateUser" ReturnType="Collection(Decimal)">
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="key" Mode="In" Type="String" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetAccountValuesByUserAndTimeframe" ReturnType="Collection(FinanceMonitorModel.GetAccountValuesByUserAndTimeframe_Result)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="TimeFrame" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ConnName_AccountTypeID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="ConnCredentialsID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ConnectionCredential" Relationship="FinanceMonitorModel.FK_Accounts_ConnectionCredentials" FromRole="Accounts" ToRole="ConnectionCredentials" />
+          <NavigationProperty Name="refConnName_AccountType" Relationship="FinanceMonitorModel.FK_Accounts_refConnName_AccountType" FromRole="Accounts" ToRole="refConnName_AccountType" />
+          <NavigationProperty Name="User" Relationship="FinanceMonitorModel.FK_Accounts_Users" FromRole="Accounts" ToRole="Users" />
+          <NavigationProperty Name="TotalAmountByAccounts" Relationship="FinanceMonitorModel.FK_TotalAmountByAccount_Accounts" FromRole="Accounts" ToRole="TotalAmountByAccount" />
+        </EntityType>
+        <EntityType Name="AccountType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountType1" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="refConnName_AccountType" Relationship="FinanceMonitorModel.FK_refConnName_AccountType_AccountTypes" FromRole="AccountTypes" ToRole="refConnName_AccountType" />
+        </EntityType>
+        <EntityType Name="ConnectionCredential">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ConnectionID" Type="Int32" Nullable="false" />
+          <Property Name="LoginUsername" Type="String" MaxLength="50" Unicode="false" FixedLength="false" Nullable="false" />
+          <Property Name="LoginPassword" Type="String" MaxLength="50" Unicode="false" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="FinanceMonitorModel.FK_Accounts_ConnectionCredentials" FromRole="ConnectionCredentials" ToRole="Accounts" />
+          <NavigationProperty Name="ConnectionName" Relationship="FinanceMonitorModel.FK_ConnectionCredentials_ConnectionNames" FromRole="ConnectionCredentials" ToRole="ConnectionNames" />
+          <Property Type="String" Name="key" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ConnectionName">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ConnectionName1" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="ConnectionCredentials" Relationship="FinanceMonitorModel.FK_ConnectionCredentials_ConnectionNames" FromRole="ConnectionNames" ToRole="ConnectionCredentials" />
+          <NavigationProperty Name="refConnName_AccountType" Relationship="FinanceMonitorModel.FK_refConnName_AccountType_ConnectionNames" FromRole="ConnectionNames" ToRole="refConnName_AccountType" />
+        </EntityType>
+        <EntityType Name="refConnName_AccountType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ConnectionNameID" Type="Int32" Nullable="false" />
+          <Property Name="AccountTypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="FinanceMonitorModel.FK_Accounts_refConnName_AccountType" FromRole="refConnName_AccountType" ToRole="Accounts" />
+          <NavigationProperty Name="AccountType" Relationship="FinanceMonitorModel.FK_refConnName_AccountType_AccountTypes" FromRole="refConnName_AccountType" ToRole="AccountTypes" />
+          <NavigationProperty Name="ConnectionName" Relationship="FinanceMonitorModel.FK_refConnName_AccountType_ConnectionNames" FromRole="refConnName_AccountType" ToRole="ConnectionNames" />
+        </EntityType>
+        <EntityType Name="TotalAmountByAccount">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountID" Type="Int32" Nullable="false" />
+          <Property Name="RequestDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Account" Relationship="FinanceMonitorModel.FK_TotalAmountByAccount_Accounts" FromRole="TotalAmountByAccount" ToRole="Accounts" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Accounts" Relationship="FinanceMonitorModel.FK_Accounts_Users" FromRole="Users" ToRole="Accounts" />
+          <Property Type="String" Name="key" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Accounts_ConnectionCredentials">
+          <End Role="ConnectionCredentials" Type="FinanceMonitorModel.ConnectionCredential" Multiplicity="1" />
+          <End Role="Accounts" Type="FinanceMonitorModel.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConnectionCredentials">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="ConnCredentialsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Accounts_refConnName_AccountType">
+          <End Role="refConnName_AccountType" Type="FinanceMonitorModel.refConnName_AccountType" Multiplicity="1" />
+          <End Role="Accounts" Type="FinanceMonitorModel.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="refConnName_AccountType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="ConnName_AccountTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Accounts_Users">
+          <End Role="Users" Type="FinanceMonitorModel.User" Multiplicity="1" />
+          <End Role="Accounts" Type="FinanceMonitorModel.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TotalAmountByAccount_Accounts">
+          <End Role="Accounts" Type="FinanceMonitorModel.Account" Multiplicity="1" />
+          <End Role="TotalAmountByAccount" Type="FinanceMonitorModel.TotalAmountByAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TotalAmountByAccount">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_refConnName_AccountType_AccountTypes">
+          <End Role="AccountTypes" Type="FinanceMonitorModel.AccountType" Multiplicity="1" />
+          <End Role="refConnName_AccountType" Type="FinanceMonitorModel.refConnName_AccountType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="refConnName_AccountType">
+              <PropertyRef Name="AccountTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConnectionCredentials_ConnectionNames">
+          <End Role="ConnectionNames" Type="FinanceMonitorModel.ConnectionName" Multiplicity="1" />
+          <End Role="ConnectionCredentials" Type="FinanceMonitorModel.ConnectionCredential" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConnectionNames">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ConnectionCredentials">
+              <PropertyRef Name="ConnectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_refConnName_AccountType_ConnectionNames">
+          <End Role="ConnectionNames" Type="FinanceMonitorModel.ConnectionName" Multiplicity="1" />
+          <End Role="refConnName_AccountType" Type="FinanceMonitorModel.refConnName_AccountType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConnectionNames">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="refConnName_AccountType">
+              <PropertyRef Name="ConnectionNameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetAllAccountsByUser_Result">
+          <Property Type="Int32" Name="ID" Nullable="true" />
+          <Property Type="String" Name="AccNickName" Nullable="true" MaxLength="151" />
+          <Property Type="String" Name="AccountType" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="LatestAmount" Nullable="true" Precision="19" />
+          <Property Type="DateTime" Name="LatestRequestDate" Nullable="true" />
+          <Property Type="Boolean" Name="Active" Nullable="true" />
+          <Property Type="Int32" Name="AccountTypeID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetConnectionCredentials_Result">
+          <Property Type="String" Name="LoginUserName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LoginPassword" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="key" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetConnNameAccTypeByAccID_Result">
+          <Property Type="Int32" Name="ConnectionNameID" Nullable="false" />
+          <Property Type="Int32" Name="AccountTypeID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="CheckIfUserExistsByUsername_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="key" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetAllPossibleAccounts_Result">
+          <Property Type="Int32" Name="ConnNameID" Nullable="false" />
+          <Property Type="String" Name="ConnectionName" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="AccTypeID" Nullable="false" />
+          <Property Type="String" Name="AccountType" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetAccountValuesByUserAndTimeframe_Result">
+          <Property Type="Int32" Name="AccountID" Nullable="false" />
+          <Property Type="Decimal" Name="Amount" Nullable="false" Precision="19" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FinanceMonitorModelStoreContainer" CdmEntityContainer="FinanceMonitorEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="FinanceMonitorModel.Account">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ConnName_AccountTypeID" ColumnName="ConnName_AccountTypeID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ConnCredentialsID" ColumnName="ConnCredentialsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountTypes">
+            <EntityTypeMapping TypeName="FinanceMonitorModel.AccountType">
+              <MappingFragment StoreEntitySet="AccountTypes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AccountType1" ColumnName="AccountType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConnectionCredentials">
+            <EntityTypeMapping TypeName="FinanceMonitorModel.ConnectionCredential">
+              <MappingFragment StoreEntitySet="ConnectionCredentials">
+                <ScalarProperty Name="key" ColumnName="key" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ConnectionID" ColumnName="ConnectionID" />
+                <ScalarProperty Name="LoginUsername" ColumnName="LoginUsername" />
+                <ScalarProperty Name="LoginPassword" ColumnName="LoginPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConnectionNames">
+            <EntityTypeMapping TypeName="FinanceMonitorModel.ConnectionName">
+              <MappingFragment StoreEntitySet="ConnectionNames">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ConnectionName1" ColumnName="ConnectionName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="refConnName_AccountType">
+            <EntityTypeMapping TypeName="FinanceMonitorModel.refConnName_AccountType">
+              <MappingFragment StoreEntitySet="refConnName_AccountType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ConnectionNameID" ColumnName="ConnectionNameID" />
+                <ScalarProperty Name="AccountTypeID" ColumnName="AccountTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TotalAmountByAccounts">
+            <EntityTypeMapping TypeName="FinanceMonitorModel.TotalAmountByAccount">
+              <MappingFragment StoreEntitySet="TotalAmountByAccount">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="FinanceMonitorModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="key" ColumnName="key" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAllAccountsByUser" FunctionName="FinanceMonitorModel.Store.GetAllAccountsByUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FinanceMonitorModel.GetAllAccountsByUser_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AccNickName" ColumnName="AccNickName" />
+                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+                <ScalarProperty Name="LatestAmount" ColumnName="LatestAmount" />
+                <ScalarProperty Name="LatestRequestDate" ColumnName="LatestRequestDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetConnectionCredentials" FunctionName="FinanceMonitorModel.Store.GetConnectionCredentials">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FinanceMonitorModel.GetConnectionCredentials_Result">
+                <ScalarProperty Name="LoginUserName" ColumnName="LoginUserName" />
+                <ScalarProperty Name="LoginPassword" ColumnName="LoginPassword" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertAmountForAccount" FunctionName="FinanceMonitorModel.Store.InsertAmountForAccount" />
+          <FunctionImportMapping FunctionImportName="ValidateUserCredentials" FunctionName="FinanceMonitorModel.Store.ValidateUserCredentials" />
+          <FunctionImportMapping FunctionImportName="GetConnNameAccTypeByAccID" FunctionName="FinanceMonitorModel.Store.GetConnNameAccTypeByAccID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FinanceMonitorModel.GetConnNameAccTypeByAccID_Result">
+                <ScalarProperty Name="ConnectionNameID" ColumnName="ConnectionNameID" />
+                <ScalarProperty Name="AccountTypeID" ColumnName="AccountTypeID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateUserPassword" FunctionName="FinanceMonitorModel.Store.UpdateUserPassword" />
+          <FunctionImportMapping FunctionImportName="CheckIfUserExistsByUsername" FunctionName="FinanceMonitorModel.Store.CheckIfUserExistsByUsername">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FinanceMonitorModel.CheckIfUserExistsByUsername_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="key" ColumnName="key" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DeleteUser" FunctionName="FinanceMonitorModel.Store.DeleteUser" />
+          <FunctionImportMapping FunctionImportName="DeleteAccount" FunctionName="FinanceMonitorModel.Store.DeleteAccount" />
+          <FunctionImportMapping FunctionImportName="UpdateAccountConnectionCredentials" FunctionName="FinanceMonitorModel.Store.UpdateAccountConnectionCredentials" />
+          <FunctionImportMapping FunctionImportName="CreateAccount" FunctionName="FinanceMonitorModel.Store.CreateAccount" />
+          <FunctionImportMapping FunctionImportName="CreateAccount_ConnCredentials_Return" FunctionName="FinanceMonitorModel.Store.CreateAccount" />
+          <FunctionImportMapping FunctionImportName="GetAllPossibleAccounts" FunctionName="FinanceMonitorModel.Store.GetAllPossibleAccounts">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FinanceMonitorModel.GetAllPossibleAccounts_Result">
+                <ScalarProperty Name="ConnNameID" ColumnName="ConnNameID" />
+                <ScalarProperty Name="ConnectionName" ColumnName="ConnectionName" />
+                <ScalarProperty Name="AccTypeID" ColumnName="AccTypeID" />
+                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CreateUser" FunctionName="FinanceMonitorModel.Store.CreateUser" />
+          <FunctionImportMapping FunctionImportName="GetAccountValuesByUserAndTimeframe" FunctionName="FinanceMonitorModel.Store.GetAccountValuesByUserAndTimeframe">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FinanceMonitorModel.GetAccountValuesByUserAndTimeframe_Result">
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

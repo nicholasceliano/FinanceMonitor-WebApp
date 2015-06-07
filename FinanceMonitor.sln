@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceMonitor.Web", "FinanceMonitor.Web\FinanceMonitor.Web.csproj", "{65484FFA-1781-4C7D-9DD7-27F4F3C3D053}"
+	ProjectSection(ProjectDependencies) = postProject
+		{04832C43-3EEA-4A88-A278-CAF3E0A4FB11} = {04832C43-3EEA-4A88-A278-CAF3E0A4FB11}
+		{CF8F928E-270C-4CE8-B77D-414B65C17412} = {CF8F928E-270C-4CE8-B77D-414B65C17412}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceMonitor.Library", "FinanceMonitor.Library\FinanceMonitor.Library.csproj", "{CF8F928E-270C-4CE8-B77D-414B65C17412}"
+	ProjectSection(ProjectDependencies) = postProject
+		{04832C43-3EEA-4A88-A278-CAF3E0A4FB11} = {04832C43-3EEA-4A88-A278-CAF3E0A4FB11}
+		{CED6A750-F51D-48E1-B641-DEB152D2AC83} = {CED6A750-F51D-48E1-B641-DEB152D2AC83}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceMonitor.Data", "FinanceMonitor.Data\FinanceMonitor.Data.csproj", "{CED6A750-F51D-48E1-B641-DEB152D2AC83}"
+	ProjectSection(ProjectDependencies) = postProject
+		{04832C43-3EEA-4A88-A278-CAF3E0A4FB11} = {04832C43-3EEA-4A88-A278-CAF3E0A4FB11}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceMonitor.Config", "FinanceMonitor.Config\FinanceMonitor.Config.csproj", "{04832C43-3EEA-4A88-A278-CAF3E0A4FB11}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://nicholasceliano.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = FinanceMonitor.Web\\FinanceMonitor.Web.csproj
+		SccProjectName1 = FinanceMonitor.Web
+		SccLocalPath1 = FinanceMonitor.Web
+		SccProjectUniqueName2 = FinanceMonitor.Library\\FinanceMonitor.Library.csproj
+		SccProjectName2 = FinanceMonitor.Library
+		SccLocalPath2 = FinanceMonitor.Library
+		SccProjectUniqueName3 = FinanceMonitor.Data\\FinanceMonitor.Data.csproj
+		SccProjectName3 = FinanceMonitor.Data
+		SccLocalPath3 = FinanceMonitor.Data
+		SccProjectUniqueName4 = FinanceMonitor.Config\\FinanceMonitor.Config.csproj
+		SccProjectName4 = FinanceMonitor.Config
+		SccLocalPath4 = FinanceMonitor.Config
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{65484FFA-1781-4C7D-9DD7-27F4F3C3D053}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65484FFA-1781-4C7D-9DD7-27F4F3C3D053}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65484FFA-1781-4C7D-9DD7-27F4F3C3D053}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65484FFA-1781-4C7D-9DD7-27F4F3C3D053}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF8F928E-270C-4CE8-B77D-414B65C17412}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF8F928E-270C-4CE8-B77D-414B65C17412}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF8F928E-270C-4CE8-B77D-414B65C17412}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF8F928E-270C-4CE8-B77D-414B65C17412}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CED6A750-F51D-48E1-B641-DEB152D2AC83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CED6A750-F51D-48E1-B641-DEB152D2AC83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CED6A750-F51D-48E1-B641-DEB152D2AC83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CED6A750-F51D-48E1-B641-DEB152D2AC83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04832C43-3EEA-4A88-A278-CAF3E0A4FB11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04832C43-3EEA-4A88-A278-CAF3E0A4FB11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04832C43-3EEA-4A88-A278-CAF3E0A4FB11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04832C43-3EEA-4A88-A278-CAF3E0A4FB11}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

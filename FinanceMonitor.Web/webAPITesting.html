@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Web API Testing</title>
+    <script src="App_Themes/FinanceMonitor/Scripts/webAPIScript.js"></script>
+    <script src="App_Themes/FinanceMonitor/Scripts/jquery-2.1.0.min.js"></script>
+    <style>
+        td
+        {
+            padding-top:5px;
+            padding-bottom:5px;
+        }
+        th
+        {
+            text-align:left;
+            font-size:x-large;
+        }
+        button
+        {
+            width:250px;
+            white-space:nowrap;
+        }
+    </style>
+</head>
+<body>
+    <table id="webAPITests" style="width:100%;">
+        <tr>
+            <th colspan="2">
+                Web API Tests
+            </th>
+        </tr>
+        <tr>
+            <td style="width:250px;">
+                <button id="btnAllAccountsByUser" onclick="webAPI.GeneralAccounts.AllAccountsByUser(1);">GET AllAccountsByUser</button>
+            </td>
+            <td>
+                <label id="lblAllAccountsByUser"></label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="btnLatestAmountByConnNameAccType" onclick="webAPI.GeneralAccounts.LatestAmountByConnNameAccType(3);">GET LatestAmountByConnNameAccType</button>
+            </td>
+            <td>
+                <label id="lblLatestAmountByConnNameAccType"></label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="btnAllLatestAmountsByUser" onclick="webAPI.GeneralAccounts.AllLatestAmountsByUser(1);">GET AllLatestAmountsByUser</button>
+            </td>
+            <td>
+                <label id="lblAllLatestAmountsByUser"></label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="btnGetAllPossibleAccounts" onclick="webAPI.GeneralAccounts.GetAllPossibleAccounts();">GET GetAllPossibleAccounts</button>
+            </td>
+            <td>
+                <label id="lblGetAllPossibleAccounts"></label>
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <th colspan="2">
+                User APIs
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <button id="btnValidateUserInfo" onclick="webAPI.GeneralAccounts.ValidateUserCredentials('test@test.com', 'test');">POST ValidateUserInfo</button>
+            </td>
+            <td>
+                <label id="lblValidateUserInfo"></label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="btnUpdateUserPassword" onclick="webAPI.GeneralAccounts.UpdateUserPassword(1, 'c3lianoo');">POST UpdateUserPassword</button>
+            </td>
+            <td>
+                <label id="lblUpdateUserPassword"></label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="btnCreateUser" onclick="webAPI.GeneralAccounts.CreateUser('test@gggggg.com', 'password', 'FirstN', 'TestLN');">POST CreateUser</button>
+            </td>
+            <td>
+                <label id="lblCreateUser"></label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="btnDeleteUser" onclick="webAPI.GeneralAccounts.DeleteUser(4);">DELETE DeleteUser</button>
+            </td>
+            <td>
+                <label id="lblDeleteUser"></label>
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <th colspan="2">
+                Accounts CRUD APIs
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <button id="btnUpdateAccountConnectionCredentials" onclick="webAPI.GeneralAccounts.UpdateAccountConnectionCredentials(8, 'test', 'test');">POST UpdateAccountConnectionCredentials</button>
+            </td>
+            <td>
+                <label id="lblUpdateAccountConnectionCredentials"></label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="btnCreateAccount" onclick="webAPI.GeneralAccounts.CreateAccount(2, 4, 5);">POST CreateAccount</button>
+            </td>
+            <td>
+                <label id="lblCreateAccount"></label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="btnDeleteAccount" onclick="webAPI.GeneralAccounts.DeleteAccount(18);">DELETE DeleteAccount</button>
+            </td>
+            <td>
+                <label id="lblDeleteAccount"></label>
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <th colspan="2">
+                Emails
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <button id="btnTestEmail" onclick="webAPI.Tests.TestEmail();">Test Email</button>
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="Button1" onclick="webAPI.Tests.WebHookTest();">Test WebHook</button>
+            </td>
+            <td>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

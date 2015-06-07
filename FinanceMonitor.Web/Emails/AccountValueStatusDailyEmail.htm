@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+    <title>[SUBJECT]</title>
+        <style type="text/css">
+            .header { text-align:center; width:100%; margin:0 auto; height:40px; }
+            .header table { margin: 0 auto; } 
+            .headerTitle { white-space:nowrap; font:20px Arial; color:#f08406; text-transform:uppercase; margin-left:15px; } 
+            .headerImage { height:40px; width:40px; }
+            .dailyAccountValueTable { width:50%; margin:0 auto; } 
+            .footer { width:100%; text-align:center; font:10px Arial; color:lightgrey; } 
+            a, a:visited { color:#f08406; text-decoration:underline; } 
+            .numPositive { white-space:nowrap; color:#06a00e; } 
+            .numNegative { white-space:nowrap; color:#b90000; }
+
+            /*Iphone 4 and 5*/
+            @media screen and (device-aspect-ratio: 40/71), screen and (device-aspect-ratio: 2/3)
+            {
+                body[formatFix] .header { height:40px; }
+                body[formatFix] .header table { margin:0; }
+                body[formatFix] .headerTitle { font:9px Arial; margin-left:0px; margin-top:-5px; }
+                body[formatFix] .headerImage { height:40px; width:40px; }
+                body[formatFix] .dailyAccountValueTable { width:100%; }
+                body[formatFix] .footer { font:3px Arial; }
+                body[formatFix] .content table { width:100%; table-layout:fixed; white-space:nowrap; font:2.5px Arial; }
+            }
+        </style>
+    </head>
+    <body formatFix>
+        <div class="header">
+            <table>
+                <tr>
+                    <td>
+                        <img class="headerImage" src="http://financemonitor.azurewebsites.net/App_Themes/FinanceMonitor/Images/Logo_FinanceMonitor.png" />
+                    </td>
+                    <td>
+                        <div class="headerTitle">[SUBJECT]</div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="content">
+            <hr />
+                [MESSAGE]
+            <hr />
+        </div>
+        <div class="footer">
+            Copyright © 2014 Finance Monitor<br />
+            <a href="http://financemonitor.azurewebsites.net/" target="_blank" >Unsubscribe</a> from future emails?
+        </div>
+    </body>
+</html>
